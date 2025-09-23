@@ -43,7 +43,7 @@ export default function Footer() {
   const quickLinks = ["Home", "Pricing", "Contact Us"];
 
   return (
-    <footer className="relative bg-gradient-to-b from-[#0B1120] to-[#0F172A] text-gray-300 pt-12 pb-12 px-6 md:px-20 mt-8 overflow-hidden">
+    <footer className="relative bg-gradient-to-b from-[#0B1120] to-[#0F172A] text-gray-300 pt-12 pb-12 px-6 overflow-hidden">
       {/* Animated top shimmer line */}
       <motion.div
         aria-hidden="true"
