@@ -3,7 +3,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Toaster } from "sonner"
+import { Toaster } from "sonner";
+import { UserProvider } from "@/app/context/UserContext";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import CallbackRequestForm from "@/components/CallbackRequestForm";
+import CallbackPopup from "@/components/CallbackPopup";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -46,13 +50,19 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900`}>
-        <Header />
-        <main role="main" className="min-h-screen">
-          {children}
-          <Toaster position="top-right" richColors />
-        </main>
-        <Footer />
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 text-gray-900`}
+      >
+        <UserProvider>
+          <Header />
+          <main role="main" className="min-h-screen">
+            {children}
+            <Toaster position="top-right" richColors />
+          </main>
+          <Footer />
+          <WhatsAppButton />
+          <CallbackPopup />
+        </UserProvider>
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 export default function Home() {
   return (
     <>
-      <main className="bg-gray-50 min-h-screen">
+      <main className="bg-gray-50 min-h-screen overflow-hidden">
         <Hero />
         <PopularCarDeals />
         <WhyChooseUs />
