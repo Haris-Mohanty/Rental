@@ -224,7 +224,7 @@ const CallbackRequestForm: React.FC<CallbackRequestFormProps> = ({ compact }) =>
     return (
         <>
             <div className="max-w-md mx-auto p-1 md:p-3 bg-white rounded-2xl shadow-xl md:space-y-2 border border-gray-100">
-                <h2 className="text-xs md:text-xl font-semibold text-center text-gray-800">
+                <h2 className="text-xs md:text-xl font-semibold ml-2 md:text-center text-gray-800">
                     Request a Callback
                 </h2>
 
