@@ -1,13 +1,14 @@
 import Hero from "@/components/Hero";
-import PopularCarDeals from "@/components/PopularCarDeals";
+import PopularCarsSlider from "@/components/PopularCarDeals";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import { cars } from "./data/cars";
 
 export default function Home() {
   return (
     <>
       <main className="bg-gray-50 min-h-screen overflow-hidden">
         <Hero />
-        {/* <PopularCarDeals /> */}
+        <PopularCarsSlider cars={cars} />
         <WhyChooseUs />
       </main>
     </>

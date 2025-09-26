@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Users, Briefcase, Snowflake, Gauge, PlusCircle } from "lucide-react";
+import { Users, Briefcase, Snowflake, Gauge, PlusCircle, Phone, MessageCircle } from "lucide-react";
 import {
     Dialog,
     DialogContent,
@@ -11,26 +11,13 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogFooter,
 } from "@/components/ui/dialog";
 import { motion } from "framer-motion";
+import type { Car } from "../app/data/cars";
+import ContactDialog from "./ContactDialog";
 
-interface CarCardProps {
-    category: string;
-    name: string;
-    image: string;
-    passengers: number;
-    luggage: number;
-    ac: boolean;
-    kms: string;
-    rentalPrice: string;
-    discountedPrice: string;
-    gst: string;
-    totalPrice: string;
-    specialPrice: string;
-    extraKm: string;
-    extraHour: string;
-    nightDeliveryCharge: number;
-}
+type CarCardProps = Car;
 
 const CarCard: React.FC<CarCardProps> = ({
     category,
@@ -49,6 +36,7 @@ const CarCard: React.FC<CarCardProps> = ({
     extraHour,
     nightDeliveryCharge
 }) => {
+
     return (
         <Card className="relative w-full rounded-lg shadow-md border p-2">
             {/* Car Category */}
@@ -64,7 +52,7 @@ const CarCard: React.FC<CarCardProps> = ({
                 <div className="w-full md:w-1/3 flex flex-col items-center">
                     <Image
                         src={image}
-                        alt={name}
+                        alt={`Image of ${name}`}
                         width={220}
                         height={120}
                         className="object-contain w-full max-w-sm sm:max-w-md md:max-w-md"
@@ -130,7 +118,6 @@ const CarCard: React.FC<CarCardProps> = ({
                 </div>
             </div>
 
-
             {/* Special Today Price Highlight */}
             <div className="flex gap-2 items-center justify-between p-3 bg-blue-50 border rounded-md">
                 <div className="text-center rounded-md font-semibold text-gray-900">
@@ -143,50 +130,14 @@ const CarCard: React.FC<CarCardProps> = ({
 
             {/* Dialog */}
             <div className="flex flex-col md:flex-row">
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <Button className="flex-1 bg-gradient-to-r from-[#257ce0] to-[#60b2ff] hover:from-[#1f66c0] hover:to-[#4fa8ff] text-white py-2 cursor-pointer">
-                            Click for more Details
-                        </Button>
-                    </DialogTrigger>
-
-                    <DialogContent
-                        className="p-0 w-[92%] ml-4 md:ml-0 sm:w-[95%] max-w-full sm:max-w-lg 
-             sm:rounded-xl sm:shadow-xl sm:p-6 bg-white
-             h-[50vh] sm:h-auto sm:max-h-[40vh] overflow-y-auto
-             fixed bottom-0 left-0 sm:top-1/2 sm:left-1/2
-             sm:-translate-x-1/2 sm:-translate-y-1/2 translate-y-0"
-                    >
-                        <motion.div
-                            initial={{ y: 50, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            exit={{ y: 50, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeOut" }}
-                            className="flex flex-col"
-                        >
-                            <DialogHeader className="p-4 sm:p-0 border-b sm:border-none">
-                                <DialogTitle className="text-xl font-bold text-center text-[#257ce0]">
-                                    Owner Details
-                                </DialogTitle>
-                                <DialogDescription className="text-sm text-gray-600 text-center">
-                                    Contact information of the car owner
-                                </DialogDescription>
-                            </DialogHeader>
-
-                            {/* Scrollable content */}
-                            <div className="flex-1 p-4 sm:p-0 space-y-4">
-                                <div className="p-4 border rounded-lg shadow-sm bg-gray-50">
-                                    <p className="text-gray-800"><span className="font-semibold">Name:</span> Manoj Kumar Sahoo</p>
-                                    <p className="text-gray-800"><span className="font-semibold">Mob No:</span> +91 77898 10517</p>
-                                    <p className="text-gray-800"><span className="font-semibold">Business Email:</span> service@banajatravels.com</p>
-                                    <p className="text-gray-800"><span className="font-semibold">Personal Email:</span> manojkumar5122001@gmail.com</p>
-                                    <p className="text-gray-800"><span className="font-semibold">Address:</span> Bhubaneswar, Odisha</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </DialogContent>
-
-                </Dialog>
+                <ContactDialog
+                    category={category}
+                    name={name}
+                    passengers={passengers}
+                    luggage={luggage}
+                    ac={ac}
+                    specialPrice={specialPrice}
+                />
             </div>
         </Card>
     );
