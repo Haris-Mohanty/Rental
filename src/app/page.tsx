@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <main className="bg-gray-50 min-h-screen overflow-hidden">
         <Hero />
-        <PopularCarDeals />
+        {/* <PopularCarDeals /> */}
         <WhyChooseUs />
       </main>
     </>

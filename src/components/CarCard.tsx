@@ -50,7 +50,7 @@ const CarCard: React.FC<CarCardProps> = ({
     nightDeliveryCharge
 }) => {
     return (
-        <Card className="relative w-full rounded-lg shadow-md border p-2 bg-white">
+        <Card className="relative w-full rounded-lg shadow-md border p-2">
             {/* Car Category */}
             <div className="absolute left-0">
                 <div className="relative bg-gradient-to-r from-[#257ce0] to-[#60b2ff] text-white text-xs font-semibold px-3 py-1 rounded-tr-md">
@@ -59,7 +59,7 @@ const CarCard: React.FC<CarCardProps> = ({
             </div>
 
             {/* Car Image + Info */}
-            <div className="flex flex-col md:flex-row gap-2">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-6 items-center md:items-start">
                 {/* Left side - Image + Name */}
                 <div className="w-full md:w-1/3 flex flex-col items-center">
                     <Image
@@ -67,9 +67,9 @@ const CarCard: React.FC<CarCardProps> = ({
                         alt={name}
                         width={220}
                         height={120}
-                        className="object-contain"
+                        className="object-contain w-full max-w-sm sm:max-w-md md:max-w-md"
                     />
-                    <h2 className="font-bold text-lg text-teal-700">{name}</h2>
+                    <h2 className="font-bold text-base md:text-lg uppercase text-teal-700">{name}</h2>
                 </div>
 
                 {/* Right side - Info Badges */}

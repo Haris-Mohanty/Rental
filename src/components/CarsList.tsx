@@ -6,7 +6,7 @@ const cars = [
     {
         category: "Sedan Car",
         name: "AC Swift Dzire",
-        image: "/images/WhyChooseUs.png",
+        image: "/images/swift-dzire.png",
         passengers: 4,
         luggage: 4,
         ac: true,
@@ -108,7 +108,7 @@ const cars = [
     {
         category: "SUV Car",
         name: "Maruti Suzuki Ertiga",
-        image: "/images/ertiga.png",
+        image: "/images/suzuki-ertiga.png",
         passengers: 6,
         luggage: 4,
         ac: true,
@@ -193,7 +193,7 @@ const cars = [
     {
         category: "Luxury Car",
         name: "AUDI A6",
-        image: "/images/traveller-25.png",
+        image: "/images/audi-a6.png",
         passengers: 4,
         luggage: 4,
         ac: true,
