@@ -144,18 +144,18 @@ export default function Footer() {
             className="flex items-center gap-3 mb-3 hover:text-cyan-400 transition-colors"
           >
             <Phone size={18} className="text-cyan-400" />
-            <span className="text-sm">+91 77898 10517</span>
+            <span className="text-sm">+91 99373 76969</span>
           </a>
 
           {/* WhatsApp */}
           <a
-            href="https://wa.me/917789810517"
+            href="https://wa.me/919937376969"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 hover:text-cyan-400 transition-colors"
           >
             <FaWhatsapp size={18} className="text-green-500" />
-            <span className="text-sm">+91 77898 10517</span>
+            <span className="text-sm">+91 99373 76969</span>
           </a>
 
         </motion.div>

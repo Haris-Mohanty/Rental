@@ -24,7 +24,7 @@ const ContactDialog: React.FC<ContactDialogProps> = ({
 }) => {
     // Fixed owner info
     const ownerName = "Manoj Kumar Sahoo";
-    const phoneNumber = "+917789810517";
+    const phoneNumber = "+919937376969";
     const businessEmail = "service@banajatravels.com";
     const personalEmail = "manojkumar5122001@gmail.com";
     const address = "Bhubaneswar, Odisha";
@@ -42,12 +42,7 @@ const ContactDialog: React.FC<ContactDialogProps> = ({
             </DialogTrigger>
 
             <DialogContent
-                className="p-3 sm:p-6 w-[92%] sm:w-[95%] max-w-full sm:max-w-lg 
-          sm:rounded-xl sm:shadow-xl bg-white
-          h-auto max-h-[90vh] overflow-hidden
-          fixed bottom-0 left-0 sm:top-1/2 sm:left-1/2
-          sm:-translate-x-1/2 sm:-translate-y-1/2 translate-y-0
-          mx-auto"
+                className="max-w-md"
             >
                 <motion.div
                     initial={{ y: 50, opacity: 0 }}
