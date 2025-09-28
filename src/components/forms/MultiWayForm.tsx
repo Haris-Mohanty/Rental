@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -13,6 +12,8 @@ import {
     Plus,
     Minus,
     Search,
+    Phone,
+    MessageCircle,
 } from "lucide-react";
 import { addMinutes, format, isBefore, startOfDay } from "date-fns";
 import {
@@ -23,6 +24,13 @@ import {
     CommandItem,
 } from "../ui/command";
 import { toast } from "sonner";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+} from "@/components/ui/dialog";
 
 interface MultiWayFormProps {
     pickupDate: Date | null;
@@ -61,6 +69,7 @@ const MultiWayForm: React.FC<MultiWayFormProps> = ({
     const [isDropOffDateOpen, setIsDropOffDateOpen] = useState(false);
     const [isDropOffTimeOpen, setIsDropOffTimeOpen] = useState(false);
     const [isCityOpen, setIsCityOpen] = useState(false);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     // Generate times (15 min intervals)
     const times = useMemo(() => {
@@ -75,18 +84,14 @@ const MultiWayForm: React.FC<MultiWayFormProps> = ({
     }, []);
 
     const addDestination = () => {
-        // Restrict to max 3
         if (destinations.length >= 3) {
             toast.error("You can only add up to 3 destinations.");
             return;
         }
-
-        // Validate last destination is filled
         if (destinations[destinations.length - 1].trim() === "") {
             toast.error("Please fill the destination before adding another.");
             return;
         }
-
         setDestinations([...destinations, ""]);
     };
 
@@ -113,22 +118,19 @@ const MultiWayForm: React.FC<MultiWayFormProps> = ({
             return;
         }
 
-        toast.success("Searching cabs... 🚖");
-
-        console.log({
-            pickupCity,
-            pickupDate,
-            pickupTime,
-            dropOffDate,
-            dropOffTime,
-            destinations,
-        });
+        setIsDialogOpen(true);
     };
+
+    const whatsappMessage = `Hello, I want to book a multi-way trip.
+
+Pickup City: ${pickupCity}
+Destinations: ${destinations.filter((d) => d.trim()).join(" → ")}
+Pickup: ${pickupDate ? format(pickupDate, "dd-MM-yyyy") : ""} at ${pickupTime}
+Drop-off: ${dropOffDate ? format(dropOffDate, "dd-MM-yyyy") : ""} at ${dropOffTime}`;
 
     return (
         <>
             <div className="px-6 grid grid-cols-1 md:grid-cols-5 gap-4">
-
                 {/* Pickup City Dropdown */}
                 <div className="col-span-1 md:col-span-1">
                     <label className="flex items-center gap-1 text-sm font-medium text-gray-600 mb-1">
@@ -365,11 +367,48 @@ const MultiWayForm: React.FC<MultiWayFormProps> = ({
                     </Button>
                 </div>
             </div>
+
+            {/* Dialog */}
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle className="text-lg font-semibold">Owner Details</DialogTitle>
+                        <DialogDescription>
+                            Contact the cab owner directly for booking confirmation.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                        <div className="flex flex-col gap-1">
+                            <p className="text-sm font-medium">Owner: <span className="font-semibold">Banaja Travels</span></p>
+                            <p className="text-sm text-gray-600">Phone: +91 9876543210</p>
+                        </div>
+                        <div className="flex gap-3">
+                            <Button
+                                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white"
+                                onClick={() =>
+                                    window.open(
+                                        `https://wa.me/919876543210?text=${encodeURIComponent(whatsappMessage)}`,
+                                        "_blank"
+                                    )
+                                }
+                            >
+                                <MessageCircle className="w-4 h-4" />
+                                WhatsApp
+                            </Button>
+                            <Button
+                                variant="outline"
+                                className="flex items-center gap-2"
+                                onClick={() => (window.location.href = "tel:+919876543210")}
+                            >
+                                <Phone className="w-4 h-4" />
+                                Call
+                            </Button>
+                        </div>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </>
     );
 };
 
 export default MultiWayForm;
-
-
-

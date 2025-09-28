@@ -1,19 +1,8 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { Users, Briefcase, Snowflake, Gauge, PlusCircle, Phone, MessageCircle } from "lucide-react";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogFooter,
-} from "@/components/ui/dialog";
-import { motion } from "framer-motion";
+import { Users, Briefcase, Snowflake, Gauge, PlusCircle } from "lucide-react";
 import type { Car } from "../app/data/cars";
 import ContactDialog from "./ContactDialog";
 
