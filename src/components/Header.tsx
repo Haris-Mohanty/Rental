@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useUser } from "../app/context/UserContext";
+import Image from "next/image";
 
 const navItems: { name: string; href: string }[] = [
   { name: "Home", href: "/" },
@@ -41,7 +42,6 @@ const Header: React.FC = () => {
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
 
-  // ✅ Get user & setter from global context
   const { user, setUser } = useUser();
   const [loading, setLoading] = useState(false);
 
@@ -51,7 +51,6 @@ const Header: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Logout
   const handleLogout = async () => {
     setLoading(true);
     try {
@@ -75,27 +74,44 @@ const Header: React.FC = () => {
   const headerClasses = `
     fixed top-0 left-0 right-0 z-50 border-b transition-colors
     ${scrolled || pathname !== "/"
-      ? "bg-gradient-to-r from-black/90 via-black/80 to-black/90 backdrop-blur-xl border-white/10 shadow-lg"
-      : "border-transparent"
+      ? "bg-[#cfd1e8] backdrop-blur-xl border-gray-200 shadow-lg"
+      : "bg-transparent border-transparent"
     }
   `;
+
+  // ✅ Dynamic text color
+  const linkClasses = scrolled || pathname !== "/"
+    ? "text-gray-800 hover:text-brand"
+    : "text-white/80 hover:text-brand";
+
+  const signInBtnClasses = scrolled || pathname !== "/"
+    ? "text-gray-800 border-gray-400 hover:bg-gray-100"
+    : "text-black border-white/50 hover:bg-white/20";
+
+  const signUpBtnClasses = scrolled || pathname !== "/"
+    ? "bg-brand hover:bg-brand-dark text-black"
+    : "bg-brand hover:bg-brand-dark text-white";
 
   return (
     <motion.header className={headerClasses} initial="hidden" animate="visible">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo + Brand */}
+        {/* ✅ Logo */}
         <motion.div variants={logoVariant} className="flex items-center space-x-2">
           <Link href="/" className="flex items-center space-x-2 cursor-pointer">
             <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-10 h-10 bg-brand rounded-full flex items-center justify-center"
+              className="flex items-center"
             >
-              <span className="text-white font-bold text-sm">BT</span>
+              <Image
+                src="/images/logo.png"
+                alt="Banaja Travels"
+                width={230}
+                height={60}
+                className="object-contain"
+                priority
+              />
             </motion.div>
-            <span className="text-2xl font-bold text-white hover:text-brand transition-colors">
-              Banaja Travels
-            </span>
           </Link>
         </motion.div>
 
@@ -112,10 +128,7 @@ const Header: React.FC = () => {
               whileHover={{ scale: 1.15 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link
-                href={item.href}
-                className="text-white/80 hover:text-brand transition-colors font-medium"
-              >
+              <Link href={item.href} className={`${linkClasses} transition-colors font-medium`}>
                 {item.name}
               </Link>
             </motion.div>
@@ -128,17 +141,14 @@ const Header: React.FC = () => {
             <>
               <Link href="/sign-in">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    variant="outline"
-                    className="text-black border-white/50 hover:bg-white/20 cursor-pointer"
-                  >
+                  <Button variant="outline" className={`${signInBtnClasses} cursor-pointer`}>
                     Sign In
                   </Button>
                 </motion.div>
               </Link>
               <Link href="/sign-up">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button className="hidden sm:flex bg-brand hover:bg-brand-dark text-white cursor-pointer">
+                  <Button className={`${signUpBtnClasses} hidden sm:flex cursor-pointer`}>
                     Sign Up
                   </Button>
                 </motion.div>

@@ -6,6 +6,7 @@ import { Mail, Phone, Globe, ArrowRight } from "lucide-react";
 import { FaYoutube, FaFacebookF, FaInstagram } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import type { IconType } from "react-icons";
+import Image from "next/image";
 
 const container: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -67,14 +68,14 @@ export default function Footer() {
         {/* Brand & About */}
         <motion.div variants={item}>
           <div className="flex items-center gap-2 mb-4">
-            <motion.div
-              className="bg-gradient-to-tr from-blue-400 to-cyan-400 text-white font-bold px-3 py-2 rounded-full text-lg shadow-[0_0_25px_rgba(34,211,238,0.25)]"
-              animate={{ y: [0, -2, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              BT
-            </motion.div>
-            <span className="text-lg font-semibold text-white">Banaja Travels</span>
+            <Image
+              src="/images/logo.png"
+              alt="Banaja Travels"
+              width={240}
+              height={70}
+              className="object-contain"
+              priority
+            />
           </div>
           <p className="text-sm mb-5">
             Premium car rental service offering comfort, safety, and style — anytime, anywhere.
